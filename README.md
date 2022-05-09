@@ -69,4 +69,73 @@ And we found a directory named : templates_c that must be writable.**
 > **With the script we managed to find: /home/LOOKATME containing a file named password**
 ![23](https://raw.githubusercontent.com/oulhafiane/BornToSecHackMe-CTF/main/ressources/23.png)
 
+> **With the previous username and password we are able to be conected by ftp**
+![24](https://raw.githubusercontent.com/oulhafiane/BornToSecHackMe-CTF/main/ressources/24.png)
+**We found a file named README after running the command ```get README``` to download the file**
+![25](https://raw.githubusercontent.com/oulhafiane/BornToSecHackMe-CTF/main/ressources/25.png)
 
+> **We downloaded the file named fun, and we found that is a POSIX tar archive**
+![26](https://raw.githubusercontent.com/oulhafiane/BornToSecHackMe-CTF/main/ressources/26.png)
+**After unzipping the fun file, we got a lot of files ```pcap``` and they're not related to .pcap**  
+![27](https://raw.githubusercontent.com/oulhafiane/BornToSecHackMe-CTF/main/ressources/27.png)
+**After reading the files together with: ls \*.pcap > all.txt we got some c functions including main()**
+![28](https://raw.githubusercontent.com/oulhafiane/BornToSecHackMe-CTF/main/ressources/28.png)
+
+> **and after looking at the functions `getmeX()`, only `getme8()` to `getme12()` has correct return value, so we need to find
+what should be the return value of the remaining functions.
+Each functions has a comment after it in the form of `// fileX`, checking this exact comment if it is repeated somewhere
+does not bring anything. But if we check the comment that contains the next number we find a return value of a certain
+character. For example for `getme7()` we found `return p;`.
+Once we checked all the comments we completed te source code:**
+
+```C
+char getme1() { return 'I'; }
+char getme2() { return 'h'; }
+char getme3() { return 'e'; }
+char getme4() { return 'a'; }
+char getme5() { return 'r'; }
+char getme6() { return 't'; }
+char getme7() { return 'p'; }
+char getme8() { return 'w'; }
+char getme9() { return 'n'; }
+char getme10() { return 'a'; }
+char getme11() { return 'g'; }
+char getme12() { return 'e'; }
+int main() {
+	printf("M");
+	printf("Y");
+	printf(" ");
+	printf("P");
+	printf("A");
+	printf("S");
+	printf("S");
+	printf("W");
+	printf("O");
+	printf("R");
+	printf("D");
+	printf(" ");
+	printf("I");
+	printf("S");
+	printf(":");
+	printf(" ");
+	printf("%c",getme1());
+	printf("%c",getme2());
+	printf("%c",getme3());
+	printf("%c",getme4());
+	printf("%c",getme5());
+	printf("%c",getme6());
+	printf("%c",getme7());
+	printf("%c",getme8());
+	printf("%c",getme9());
+	printf("%c",getme10());
+	printf("%c",getme11());
+	printf("%c",getme12());
+	printf("\n");
+	printf("Now SHA-256 it and submit");
+}
+```
+
+> **So the password for the user 'laurie' is `SHA256("Iheartpwnage")` which is `330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4`.**
+
+> **When we connected to the user laurie via ssh we found another README wich says:**
+![29](https://raw.githubusercontent.com/oulhafiane/BornToSecHackMe-CTF/main/ressources/29.png)
