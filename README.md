@@ -1,3 +1,9 @@
+# Contributors
+[Zakariaa Oulhafiane](https://github.com/oulhafiane)  
+[Mr-lsaidi](https://github.com/Mr-lsaidi)  
+[Yahya Ez-zainabi](https://github.com/yahyasemih)  
+[Hatim Mzah](https://github.com/mza7a/)  
+
 # Reconnaissance and information gathering
 > **When running BornToSecHackMe-v1.1.iso a simple login prompt appeared, no IP address is displayed on the screen, we don't know any user/password in the system.**  
 ![1](https://raw.githubusercontent.com/oulhafiane/BornToSecHackMe-CTF/main/ressources/1.png)
@@ -112,7 +118,7 @@ the password is : Iheartpwnage
 
 > **So the password for the user 'laurie' is `SHA256("Iheartpwnage")` which is `330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4`.**
 
-# Exploit bomb binary
+# Exploit bomb binary (GDB Explanation made by [mza7a](https://github.com/mza7a/Boot2Root/blob/master/writeup4.md))
 
 > **When we connected to the user laurie via ssh we found another README wich says:**
 ![29](https://raw.githubusercontent.com/oulhafiane/BornToSecHackMe-CTF/main/ressources/29.png)
@@ -691,15 +697,15 @@ str[15] = 'g';
 So we can continue the same way using only alphabets in the ascii table.
 ```
 str[0] = 'i'; => the result of the AND operation should be 0 => 0x70('p') & 0xf = 0
-str[5] = 'a'; => the result of the AND operation should be 5 => 0x75('u') & 0xf = 5
+str[5] = 'a'; => the result of the AND operation should be 5 => 0x65('e') & 0xf = 5
 str[11] = 'n'; => the result of the AND operation should be 11 => 0x6b('k') & 0xf = 11
 str[13] = 't'; => the result of the AND operation should be 13 => 0x6d('m') & 0xf = 13
-str[1] = 's'; => the result of the AND operation should be 1 => 0x61('a') & 0xf = 1
+str[1] = 's'; => the result of the AND operation should be 1 => 0x71('q') & 0xf = 1
 ```
 
 Note: There's more than one way to solve this challenge we'll check all the possibilities later on if the password won't work.
 
-So the final string we should input is : "opukma"
+So the final string we should input is : "opekmq"
 
 ## Phase 6
 In the last phase we are again invited to read 6 numbers. Basically it checks if all numbers are less or equal to 6 and distinct and do some other operations, We created a script in python which will do the permutations and at the end it turns out that the combination is 4 2 6 3 1 5
@@ -756,3 +762,4 @@ README
 CONGRATULATIONS !!!!
 To be continued...
 ```
+
